@@ -39,3 +39,10 @@ def plot_trend(trend):
     )
 
         return fig
+
+def plot_refund_distribution(prod_info):
+    fig = px.pie(prod_info,
+                 names='product_id',
+                 values='refund_amount_usd',
+                 title='Refund Distribution by Product')
+    return fig
