@@ -29,3 +29,13 @@ def order_val_dist(data):
     )
     return fig
 
+def plot_trend(trend):
+        fig = px.line(
+        trend,
+        x='month',
+        y=['revenue', 'orders_count', 'refund_amount'],
+        title='Revenue, Orders, and Refund Trends Over Time',
+        markers=True
+    )
+
+        return fig
