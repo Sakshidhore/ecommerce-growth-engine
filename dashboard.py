@@ -28,7 +28,7 @@ def load_data(path):
  ) = load_data('./data/')
 
 
-# st.dataframe(order_item_refunds)
+# # st.dataframe(order_item_refunds)
 
 # Setting Title
 st.title("Dashboard")
@@ -53,10 +53,22 @@ with tab[1]:
 
 
 with tab[2]:
-    st.header('Product Performance & Refund Analysis')
+    refund_table=pd.read_csv('data/order_item_refunds.csv')
+    orders['created_at'] = pd.to_datetime(orders['created_at'], errors='coerce')
+    orders['month'] = orders['created_at'].dt.to_period('M').astype(str)
+    refund_table['created_at'] = pd.to_datetime(refund_table['created_at'], errors='coerce')
+    refund_table['month'] = refund_table['created_at'].dt.to_period('M').astype(str)
+    revenue_trend = orders.groupby('month')['price_usd'].sum().reset_index(name='revenue')
 
+    orders_trend = orders.groupby('month').size().reset_index(name='orders_count')
 
+    refund_trend = refund_table.groupby('month')['refund_amount_usd'].sum().reset_index(name='refund_amount')
 
+    trend = revenue_trend.merge(orders_trend, on='month', how='left').merge(refund_trend, on='month', how='left').fillna(0)
+    tab2_columns = st.columns([0.7, 0.3], gap='large')
+    with tab2_columns[0]:
+        st.plotly_chart(vis.plot_trend(trend))
+    
 with tab[3]:
     st.subheader('Customer Lifecycle & Repeat Behaviour')
 
@@ -123,5 +135,4 @@ with tab[3]:
         st.plotly_chart(vis.order_val_dist(orders_with_type))
 
 
-    
-    
+
