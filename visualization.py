@@ -29,3 +29,20 @@ def order_val_dist(data):
     )
     return fig
 
+def plot_trend(trend):
+        fig = px.line(
+        trend,
+        x='month',
+        y=['revenue', 'orders_count', 'refund_amount'],
+        title='Revenue, Orders, and Refund Trends Over Time',
+        markers=True
+    )
+
+        return fig
+
+def plot_refund_distribution(prod_info):
+    fig = px.pie(prod_info,
+                 names='product_id',
+                 values='refund_amount_usd',
+                 title='Refund Distribution by Product')
+    return fig
