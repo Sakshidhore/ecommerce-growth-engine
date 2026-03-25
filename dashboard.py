@@ -135,7 +135,17 @@ with tab[0]:
             
         )
 
-    
+    col3, col4 = st.columns(2)
+
+    with col3:
+        pie_option = st.radio("Distribution:", ["Revenue", "Traffic"], horizontal=True)
+
+        if pie_option == "Revenue":
+            fig = vis.pie_chart(channel_summary, "revenue", "Revenue")
+        else:
+            fig = vis.pie_chart(channel_summary, "sessions", "Traffic")
+
+        st.plotly_chart(fig, use_container_width=True)
 
 
 

@@ -27,6 +27,17 @@ def traffic_vs_conversion(channel_summary):
     fig.update_layout(height=180, margin=dict(t=40, b=10))
     return fig
 
+# 3. Pie Chart (Reusable 🔥)
+def pie_chart(channel_summary, value, title):
+    fig = px.pie(
+        channel_summary,
+        names="utm_source",
+        values=value,
+        hole=0.4,
+        title=title
+    )
+    fig.update_layout(height=150, margin=dict(t=40, b=10))
+    return fig
 
 
 
