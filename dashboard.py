@@ -47,7 +47,7 @@ tab = st.tabs([
 
 # Marketing Channel & Effiiency
 with tab[0]:
-    st.header('Marketing Channel & Effiiency')
+    st.header('Marketing Channel & Efficiency')
 
     # Total Session and Conversion Rate
     total_sessions = website_sessions['website_session_id'].nunique()
